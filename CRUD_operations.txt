@@ -1,0 +1,11 @@
+= CRUD operations
+
+== How to create new items
+
+== How to read items
+
+== How update items using PUT
+
+== How update items using PATCH
+
+== How to delete items

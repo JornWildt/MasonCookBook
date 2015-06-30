@@ -1,0 +1,14 @@
+Binaries/
+bin/
+obj/
+.nuget/
+*.nupkg
+*.user
+*.suo
+*.dll
+TestResult.xml
+*.VisualState.xml
+UNUSED*
+UNUSED*/
+Logs/
+packages/

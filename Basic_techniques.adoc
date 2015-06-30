@@ -1,0 +1,166 @@
+= Basic techniques
+
+
+== How to represent links
+
+=== Problem
+
+A resource needs to embed links to other resources.
+
+=== Solution
+
+Embed a `@controls` element with links to the relevant resources.
+
+=== Discussion
+
+Use links to bind different resources together. Links represent relations such as "parent-of" between resources. The use
+of links in representations allows a client to discover related resources on the fly - instead of hard coding the client with knowledge of the URL structures used.
+
+Building clients that discover URLs on the fly opens up for some really nice improvements:
+
+* Client developers can explores the resources to get a better understanding of them - without having to read any documentation. The returned representations may even contain inline documentation right where the client developers need it.
+
+* The server can off-load certain resources to Content Delivery Networks or other servers that better handle the load of specific resources.
+
+* The server can add tracking, signatures and authorization elements to URLs without having to modify clients.
+
+* The client can interact with different independent implementations of the same service even though they reside on different servers with different URL structures.
+
+=== Example
+
+Here we have the representation of a single issue from the issue tracker. It contains links to itself (the "self" linke), its parent project (the "up" link) and its own list of attachments (the "is:attachments" link):
+
+----
+{
+  "@namespaces":{
+    "is":{
+      "name":"http://elfisk.dk/mason/issue-tracker/reltypes.html#"
+    }
+  },
+  "@controls":{
+    "self":{
+      "href":"http://issue-tracker.org/issues/1"
+    },
+    "up":{
+      "title":"Containing project",
+      "href":"http://issue-tracker.org/projects/1"
+    },
+    "is:attachments":{
+      "title":"All attachments for this issue",
+      "href":"http://issue-tracker.org/issues/1/attachments"
+    },
+  }
+}
+----
+
+
+// ----------------------------------------------------------------------
+== How to shorten link relations using curies
+
+=== Problem
+
+Custom link relation names are too long and clutters readability of the source.
+
+=== Solution
+
+Use Curies (Compact URIs) to shorten link relation names.
+
+=== Discussion
+
+Compact URIs or "CURIEs" for short is a standard way of shortening URIs as described in http://www.w3.org/TR/2009/CR-curie-20090116/. A CURIE is comprised of two components, a prefix and a reference. The prefix is separated from the reference by a colon (:) - like for instance "is:attachments" where "is" is the prefix and "attachments" is the reference. In Mason the prefix refers to a namespace declaration in the `@meta` section.
+
+A CURIE is expanded into a full URI by looking up the prefix in the namespace declarations and substituting the prefix with the "name" value of the namespace.
+
+All CURIEs in Mason MUST be expanded to URIs by the client before looking for link relations / control names.
+
+=== Example
+
+Here we have the representation of a single issue from the issue tracker. There are three link relations used in it - "self", "up" and "is:attachments". The last link relation "is:attachment" is a CURIE and can be expanded to "http://elfisk.dk/mason/issue-tracker/reltypes.html#attachments" based on the corresponding namespace declaration.
+
+----
+{
+  "@namespaces":{
+    "is":{
+      "name":"http://elfisk.dk/mason/issue-tracker/reltypes.html#"
+    }
+  },
+  "@controls":{
+    "self":{
+      "href":"http://issue-tracker.org/issues/1"
+    },
+    "up":{
+      "title":"Containing project",
+      "href":"http://issue-tracker.org/projects/1"
+    },
+    "is:attachments":{
+      "title":"All attachments for this issue",
+      "href":"http://issue-tracker.org/issues/1/attachments"
+    },
+  }
+}
+----
+
+
+// ----------------------------------------------------------------------
+== How to represent link templates
+
+=== Problem
+
+
+=== Solution
+
+
+=== Discussion
+
+
+=== Example
+
+
+
+// ----------------------------------------------------------------------
+== How to represent unsafe actions
+
+=== Problem
+
+
+=== Solution
+
+
+=== Discussion
+
+
+=== Example
+
+
+
+// ----------------------------------------------------------------------
+== How to handle file uploads
+
+=== Problem
+
+
+=== Solution
+
+
+=== Discussion
+
+
+=== Example
+
+
+
+// ----------------------------------------------------------------------
+== How to represent a home document
+
+=== Problem
+
+
+=== Solution
+
+
+=== Discussion
+
+
+=== Example
+
+
