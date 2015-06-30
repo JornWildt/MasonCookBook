@@ -1,17 +1,17 @@
-= Basic techniques
+== Basic techniques
 
 
-== How to represent links
+=== How to represent links
 
-=== Problem
+==== Problem
 
 A resource needs to embed links to other resources.
 
-=== Solution
+==== Solution
 
 Embed a `@controls` element with links to the relevant resources.
 
-=== Discussion
+==== Discussion
 
 Use links to bind different resources together. Links represent relations such as "parent-of" between resources. The use
 of links in representations allows a client to discover related resources on the fly - instead of hard coding the client with knowledge of the URL structures used.
@@ -26,7 +26,7 @@ Building clients that discover URLs on the fly opens up for some really nice imp
 
 * The client can interact with different independent implementations of the same service even though they reside on different servers with different URL structures.
 
-=== Example
+==== Example
 
 Here we have the representation of a single issue from the issue tracker. It contains links to itself (the "self" linke), its parent project (the "up" link) and its own list of attachments (the "is:attachments" link):
 
@@ -55,25 +55,27 @@ Here we have the representation of a single issue from the issue tracker. It con
 
 
 // ----------------------------------------------------------------------
-== How to shorten link relations using curies
+=== How to shorten link relations using curies
 
-=== Problem
+==== Problem
 
 Custom link relation names are too long and clutters readability of the source.
 
-=== Solution
+==== Solution
 
-Use Curies (Compact URIs) to shorten link relation names.
+Use CURIES (Compact URIs) to shorten control names.
 
-=== Discussion
+==== Discussion
 
 Compact URIs or "CURIEs" for short is a standard way of shortening URIs as described in http://www.w3.org/TR/2009/CR-curie-20090116/. A CURIE is comprised of two components, a prefix and a reference. The prefix is separated from the reference by a colon (:) - like for instance "is:attachments" where "is" is the prefix and "attachments" is the reference. In Mason the prefix refers to a namespace declaration in the `@meta` section.
 
-A CURIE is expanded into a full URI by looking up the prefix in the namespace declarations and substituting the prefix with the "name" value of the namespace.
+A CURIE is expanded into a full URI by looking up the prefix in the namespace declarations and substituting the prefix with the "name" value of the namespace (and removing the colon).
 
-All CURIEs in Mason MUST be expanded to URIs by the client before looking for link relations / control names.
+All CURIEs in Mason MUST be expanded to URIs by the client before looking for control names.
 
-=== Example
+CURIES are not used for `href` values in hypermedia controls.
+
+==== Example
 
 Here we have the representation of a single issue from the issue tracker. There are three link relations used in it - "self", "up" and "is:attachments". The last link relation "is:attachment" is a CURIE and can be expanded to "http://elfisk.dk/mason/issue-tracker/reltypes.html#attachments" based on the corresponding namespace declaration.
 
@@ -102,65 +104,65 @@ Here we have the representation of a single issue from the issue tracker. There 
 
 
 // ----------------------------------------------------------------------
-== How to represent link templates
+=== How to represent link templates
 
-=== Problem
-
-
-=== Solution
+==== Problem
 
 
-=== Discussion
+==== Solution
 
 
-=== Example
+==== Discussion
 
 
-
-// ----------------------------------------------------------------------
-== How to represent unsafe actions
-
-=== Problem
-
-
-=== Solution
-
-
-=== Discussion
-
-
-=== Example
+==== Example
 
 
 
 // ----------------------------------------------------------------------
-== How to handle file uploads
+=== How to represent unsafe actions
 
-=== Problem
-
-
-=== Solution
+==== Problem
 
 
-=== Discussion
+==== Solution
 
 
-=== Example
+==== Discussion
+
+
+==== Example
 
 
 
 // ----------------------------------------------------------------------
-== How to represent a home document
+=== How to handle file uploads
 
-=== Problem
-
-
-=== Solution
+==== Problem
 
 
-=== Discussion
+==== Solution
 
 
-=== Example
+==== Discussion
+
+
+==== Example
+
+
+
+// ----------------------------------------------------------------------
+=== How to represent a home document
+
+==== Problem
+
+
+==== Solution
+
+
+==== Discussion
+
+
+==== Example
 
 
