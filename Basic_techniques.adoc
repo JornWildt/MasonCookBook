@@ -5,7 +5,7 @@
 
 ==== Problem
 
-A resource needs to embed links to other resources.
+A resource needs to embed links to other resources in its own representation.
 
 ==== Solution
 
@@ -25,6 +25,10 @@ Building clients that discover URLs on the fly opens up for some really nice imp
 * The server can add tracking, signatures and authorization elements to URLs without having to modify clients.
 
 * The client can interact with different independent implementations of the same service even though they reside on different servers with different URL structures.
+
+===== Documentation
+
+Documentation for links should only describe the link relation type - which in Mason means the control name. The actual URL structure used is not relavant for the client as this will be discoved at runtime.
 
 ==== Example
 
@@ -101,7 +105,7 @@ Here we have a namespace declaration that maps from "is" to "http://elfisk.dk/ma
 
 ==== Problem
 
-How can URL templates with parameters be represented?
+A resource needs to represent URL templates for queries.
 
 ==== Solution
 
@@ -109,12 +113,68 @@ Embed a `@controls` element with a templated `href` value.
 
 ==== Discussion
 
+URL templates instruct clients (at runtime) about how URLs can be constructed from a well known set of variables. The resulting URLs are mostly used for various types of safe queries using the HTTP GET method. A URL template in Mason is declared as a `@control` element with the `isHrefTemplate` property set to `true`. This indicates to the client that the related `href` value is to be interpreted as a URL template.
+
+The rules for variable substitution in URL templates are described in https://tools.ietf.org/html/rfc6570[RFC 6570 - URI Template].
+
+A JSON schema definition can be used to described the variables used in the URL template. This is not a required feature as the variable names can be parsed from the template itself but a JSON schema makes it possible to generate automatic user interfaces on the fly - similar to HTML forms but without all the layout features.
+
+All the values for the template variables should be represented in a JSON object. Variable names are then supposed to be JSONPath expressions (without leading slashes) that refer to properties in the JSON object.
+
+===== Documentation
+
+Documentation of URL templates should declare the control name, the expected variables and their usage.
 
 ==== Example
 
+The example here contains the URL template control named "is:issue-query" which represents a query for issues in the common issue tracker example. It refers to three different variables `text`, `severity` and `pid`. All of the variables are described in the embedded JSON schema definition.
+
+----
+{
+  "@namespaces":{
+    "is":{
+      "name":"http://elfisk.dk/mason/issue-tracker/reltypes.html#"
+    }
+  },
+  "@controls":{
+    "is:issue-query":{
+      "title":"Search for issues",
+      "description":"This is a simple search that do not check attachments.",
+      "href":"http://issue-tracker.org/issues-query?text={text}&severity={severity}&project={pid}",
+      "isHrefTemplate":true,
+      "schema":{
+        "properties":{
+          "text":{
+            "description":"Substring search for text in title and description",
+            "type":"string"
+          },
+          "severity":{
+            "description":"Issue severity (exact value, 1..5)",
+            "type":"int"
+          },
+          "pid":{
+            "description":"Project ID",
+            "type":"int"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+If the client supplies the variables as a JSON object as the one below then the expanded URL becomes "http://issue-tracker.org/issues-query?text=ABC&severity=3&project=17".
+
+----
+{
+  "text": "ABC",
+  "severity": 3,
+  "pid": 17
+}
+----
 
 // ----------------------------------------------------------------------
-=== How to represent unsafe actions
+=== How to represent unsafe actions (TBD)
 
 ==== Problem
 
@@ -130,7 +190,7 @@ Embed a `@controls` element with a templated `href` value.
 
 
 // ----------------------------------------------------------------------
-=== How to handle file uploads
+=== How to handle file uploads (TBD)
 
 ==== Problem
 
@@ -146,7 +206,7 @@ Embed a `@controls` element with a templated `href` value.
 
 
 // ----------------------------------------------------------------------
-=== How to represent a home document
+=== How to represent a home document (TBD)
 
 ==== Problem
 
