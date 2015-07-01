@@ -5,3 +5,4 @@ Jørn Wildt
 
 include::Basic_techniques.adoc[]
 
+include::CRUD_operations.adoc[]

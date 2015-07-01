@@ -1,0 +1,75 @@
+== CRUD operations
+
+// ----------------------------------------------------------------------
+=== How to create new items
+
+==== Problem
+
+
+==== Solution
+
+
+==== Discussion
+
+
+==== Example
+
+
+// ----------------------------------------------------------------------
+=== How to read items
+
+==== Problem
+
+
+==== Solution
+
+
+==== Discussion
+
+
+==== Example
+
+
+// ----------------------------------------------------------------------
+=== How update items using PUT
+
+==== Problem
+
+
+==== Solution
+
+
+==== Discussion
+
+
+==== Example
+
+
+// ----------------------------------------------------------------------
+=== How update items using PATCH
+
+==== Problem
+
+
+==== Solution
+
+
+==== Discussion
+
+
+==== Example
+
+
+// ----------------------------------------------------------------------
+=== How to delete items
+
+==== Problem
+
+
+==== Solution
+
+
+==== Discussion
+
+
+==== Example

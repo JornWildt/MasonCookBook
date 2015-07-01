@@ -55,7 +55,7 @@ Here we have the representation of a single issue from the issue tracker. It con
 
 
 // ----------------------------------------------------------------------
-=== How to shorten link relations using curies
+=== How to shorten control names with curies
 
 ==== Problem
 
@@ -77,7 +77,7 @@ CURIES are not used for `href` values in hypermedia controls.
 
 ==== Example
 
-Here we have the representation of a single issue from the issue tracker. There are three link relations used in it - "self", "up" and "is:attachments". The last link relation "is:attachment" is a CURIE and can be expanded to "http://elfisk.dk/mason/issue-tracker/reltypes.html#attachments" based on the corresponding namespace declaration.
+Here we have a namespace declaration that maps from "is" to "http://elfisk.dk/mason/issue-tracker/reltypes.html#" and one single link named "is:attachments". If we expand the prefix "is" we get the link name "http://elfisk.dk/mason/issue-tracker/reltypes.html#attachments" which in this representation is equivalent to "is:attachments".
 
 ----
 {
@@ -87,13 +87,6 @@ Here we have the representation of a single issue from the issue tracker. There 
     }
   },
   "@controls":{
-    "self":{
-      "href":"http://issue-tracker.org/issues/1"
-    },
-    "up":{
-      "title":"Containing project",
-      "href":"http://issue-tracker.org/projects/1"
-    },
     "is:attachments":{
       "title":"All attachments for this issue",
       "href":"http://issue-tracker.org/issues/1/attachments"
@@ -104,19 +97,20 @@ Here we have the representation of a single issue from the issue tracker. There 
 
 
 // ----------------------------------------------------------------------
-=== How to represent link templates
+=== How to represent URL templates
 
 ==== Problem
 
+How can URL templates with parameters be represented?
 
 ==== Solution
 
+Embed a `@controls` element with a templated `href` value.
 
 ==== Discussion
 
 
 ==== Example
-
 
 
 // ----------------------------------------------------------------------
