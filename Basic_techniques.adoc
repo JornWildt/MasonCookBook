@@ -5,11 +5,11 @@
 
 ==== Problem
 
-A resource needs to embed links to other resources in its own representation.
+How can a client discover relevant resources at runtime?
 
 ==== Solution
 
-Embed a `@controls` element with links to the relevant resources.
+Use links represented in a `@controls` element with URLs to the relevant resources.
 
 ==== Discussion
 
@@ -63,7 +63,7 @@ Here we have the representation of a single issue from the issue tracker. It con
 
 ==== Problem
 
-Custom link relation names are too long and clutters readability of the source.
+Custom control names are too long and clutters readability of the JSON source. How can the it be made more readable?
 
 ==== Solution
 
@@ -105,15 +105,17 @@ Here we have a namespace declaration that maps from "is" to "http://elfisk.dk/ma
 
 ==== Problem
 
-A resource needs to represent URL templates for queries.
+How can clients discover URLs that depends on values supplied by the client?
 
 ==== Solution
 
-Embed a `@controls` element with a templated `href` value.
+Use templated URLs represented as a `@controls` element with a templated `href` value.
 
 ==== Discussion
 
-URL templates instruct clients (at runtime) about how URLs can be constructed from a well known set of variables. The resulting URLs are mostly used for various types of safe queries using the HTTP GET method. A URL template in Mason is declared as a `@control` element with the `isHrefTemplate` property set to `true`. This indicates to the client that the related `href` value is to be interpreted as a URL template.
+URL templates instruct clients (at runtime) about URL construction from a well known set of variables - as for instance a query where the client is supposed to include query parameters in the URL and then GET that resource.
+
+A URL template in Mason is declared as a `@control` element with the `isHrefTemplate` property set to `true`. This indicates to the client that the related `href` value is to be interpreted as a URL template.
 
 The rules for variable substitution in URL templates are described in https://tools.ietf.org/html/rfc6570[RFC 6570 - URI Template].
 
@@ -174,10 +176,11 @@ If the client supplies the variables as a JSON object as the one below then the 
 ----
 
 // ----------------------------------------------------------------------
-=== How to represent unsafe actions (TBD)
+=== How to represent actions
 
 ==== Problem
 
+How can clients discover available actions and their operational details?
 
 ==== Solution
 

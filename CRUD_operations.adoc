@@ -1,7 +1,7 @@
 == CRUD operations
 
 // ----------------------------------------------------------------------
-=== How to create new items
+=== How to create new items (TBD)
 
 ==== Problem
 
@@ -16,7 +16,7 @@
 
 
 // ----------------------------------------------------------------------
-=== How to read items
+=== How to read and query items (TBD)
 
 ==== Problem
 
@@ -31,7 +31,7 @@
 
 
 // ----------------------------------------------------------------------
-=== How update items using PUT
+=== How update items using PUT (TBD)
 
 ==== Problem
 
@@ -46,7 +46,7 @@
 
 
 // ----------------------------------------------------------------------
-=== How update items using PATCH
+=== How update items using PATCH (TBD)
 
 ==== Problem
 
@@ -61,7 +61,7 @@
 
 
 // ----------------------------------------------------------------------
-=== How to delete items
+=== How to delete items (TBD)
 
 ==== Problem
 
