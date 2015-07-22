@@ -184,9 +184,11 @@ How can clients discover available actions and their operational details?
 
 ==== Solution
 
+Use @controls elements to describe each possible action including both HTTP method and JSON payload.
 
 ==== Discussion
 
+Hypermedia APIs that allow clients to modify content needs some way to represent the possible operations. At the most 
 
 ==== Example
 

@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1B7FB966-60F0-4A04-B645-54E9559D6DD5}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		Advanced_techniques.adoc = Advanced_techniques.adoc
 		Basic_techniques.adoc = Basic_techniques.adoc
 		CRUD_operations.adoc = CRUD_operations.adoc
 		MAIN.adoc = MAIN.adoc

@@ -1,0 +1,1 @@
+asciidoctor MAIN.adoc -o Output\MAIN.html
