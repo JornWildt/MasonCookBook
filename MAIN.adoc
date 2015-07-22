@@ -1,4 +1,5 @@
 ﻿= Mason Cook Book
+Recipes for building great hypermedia APIs with Mason
 Jørn Wildt
 :doctype: book
 :toc: left
