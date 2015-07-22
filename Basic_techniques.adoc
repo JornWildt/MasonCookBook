@@ -188,10 +188,109 @@ Use @controls elements to describe each possible action including both HTTP meth
 
 ==== Discussion
 
-Hypermedia APIs that allow clients to modify content needs some way to represent the possible operations. At the most 
+Hypermedia APIs that allow clients to modify content needs some way to represent the possible operations. At the most basic level all that is needed is a link:
+
+----
+{
+  "@controls": {
+    "update-stuff": {
+      "title": "This is how you update stuff",
+      "href": "..."
+    }
+  }
+}
+----
+
+But links does not tell clients about the expected HTTP operation (POST, PUT, ...) and neither does it say anything about the expected payload - what data should be included and how should it be encoded? For this purpose Mason includes the properties "method", "encoding", "schema", "schemaUrl" and "template".
+
+If we include "method" and "encoding" in the example then we get this:
+
+----
+{
+  "@controls": {
+    "update-stuff": {
+      "title": "This is how you update stuff",
+      "href": "...",
+      "method": "POST",
+      "encoding": "json"
+    }
+  }
+}
+----
+
+With the above information clients can now discover what HTTP method to use (POST) and how the payload should be encoded (plain JSON). Currently Mason only expects clients to handle JSON encoding of simple data and "multipart/form-data" for file uploads. But future extensions (or internal extensions) might use URL encoding for simple data and Zip for file uploads - or other better suited encodings.
+
+But knowing the encoding alone is not enough - clients should also be able to discover what the expected payload is. This can be done using http://json-schema.org/[JSON schema] which is a JSON based format for describing JSON data structures. Such a schema can either be embedded directly in the hypermedia control using "schema" or referred to by a URL using "schemaUrl".
+
+Here is how an embedded schema could describe the payload needed to "update stuff":
+
+----
+{
+  "@controls": {
+    "update-stuff": {
+      "title": "This is how you update stuff",
+      "href": "...",
+      "method": "POST",
+      "encoding": "json",
+      "schema": {
+        "type": "object",
+        "properties": {
+           "title": {
+             "description": "The title of your stuff",
+             "type": "string"
+          },
+          "description": {
+            "description": "The description of your stuff",
+            "type": "string"
+          }
+        },
+        "required": ["title"]
+      }
+    }
+  }
+}
+----
+
+
+TEMPLATE????
+
+It can be argued that runtime discovery of method and encoding just adds unnecessary complexity as clients can be hardcoded to know these things based on the name of the hypermedia control: if the client knows how to look for the "update-stuff" control then it might as well know how to invoke it. On the other hand - if we accept that runtime lookup of URLs using links is good then we might as well go all the way and discover HTTP method and encoding at runtime too.
+
+The same argument goes for the schema description of the payload: if the client knows how to look for the "update-stuff" control then it surely also knows what the payload is expected to be.
+
+So why should we bother with method, encoding and schema at runtime? First of all because it enables client *developers* to explore and discover *all* parts the API. This can be a huge help when learning how an API works for the first time. It will reduce developer frustration and in the end improve addoption of the API. Unfortunately none of the standard browsers understand Mason (but they can still be used to render Mason as JSON structures) so a special browser is needed. At the time of writing there is only a Windows based implementation which can be found here https://github.com/JornWildt/Mason/wiki/Generic-Mason-browser.
 
 ==== Example
 
+This is how the issue tracker demo represents hypermedia controls for updating and deleting a single issue:
+
+----
+{
+  "@namespaces": {
+    "is": {
+      "name": "http://elfisk.dk/mason/issue-tracker/reltypes.html#"
+    }
+  },
+  "@controls": {
+    "is:issue-update": {
+      "title": "Update issue details",
+      "encoding": "json",
+      "href": "http://mason-issue-tracker.azurewebsites.net/issues/1",
+      "method": "POST",
+      "template": {
+        "Title": "Crash after payment",
+        "Description": "I have justed paid for two pairs of shoes - or rather I tried to. When I clicked 'Pay' all I got was a yellow error screen.",
+        "Severity": 3
+      }
+    },
+    "is:issue-delete": {
+      "title": "Delete issue",
+      "href": "http://mason-issue-tracker.azurewebsites.net/issues/1",
+      "method": "DELETE"
+    }
+  }
+}
+----
 
 
 // ----------------------------------------------------------------------

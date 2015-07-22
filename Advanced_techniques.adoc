@@ -14,3 +14,20 @@ How can clients discover operational details about
 
 
 ==== Example
+
+
+// ----------------------------------------------------------------------
+=== How to reduce the size of Mason documents (TBD)
+
+==== Problem
+
+Hypermedia controls, long control names, meta information and embedded schemas takes up bandwith - how can we reduce the size of a Mason document?
+
+==== Solution
+
+Use a combination of CURIEs, the "prefer" header and linked schemas instead of embedded.
+
+==== Discussion
+
+
+==== Example
