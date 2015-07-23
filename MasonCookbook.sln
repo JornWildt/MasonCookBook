@@ -6,6 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		Advanced_techniques.adoc = Advanced_techniques.adoc
 		Basic_techniques.adoc = Basic_techniques.adoc
+		build.bat = build.bat
 		CRUD_operations.adoc = CRUD_operations.adoc
 		MAIN.adoc = MAIN.adoc
 		README.md = README.md

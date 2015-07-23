@@ -1,6 +1,7 @@
 == Advanced techniques
 
 // ----------------------------------------------------------------------
+[[recipe_template_values]]
 === How to add tracking and authorization details (TBD)
 
 ==== Problem
@@ -31,3 +32,26 @@ Use a combination of CURIEs, the "prefer" header and linked schemas instead of e
 
 
 ==== Example
+
+
+// ----------------------------------------------------------------------
+=== How to create user interfaces from a Mason document (TBD)
+
+==== Problem
+
+Mason does not include any user interface information - how can clients then create dynamic user interfaces?
+
+==== Solution
+
+1) Use the JSON schema information to generate UI (using for instance tools like XX and YY).
+
+2) Include layout information as normal API data (using a custom way of describing the layout).
+
+3) Include a reference to some sort of external user interface template (a'la XML stylesheets) (using a custom way of describing the layout).
+
+==== Discussion
+
+
+==== Example
+
+

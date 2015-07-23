@@ -3,7 +3,7 @@ Recipes for building great hypermedia APIs with Mason
 Jørn Wildt
 :doctype: book
 :toc: left
-# :icons:
+// :icons:
 
 include::Basic_techniques.adoc[]
 
