@@ -26,10 +26,11 @@ Hypermedia controls, long control names, meta information and embedded schemas t
 
 ==== Solution
 
-Use a combination of CURIEs, the "prefer" header and linked schemas instead of embedded.
+Use a combination of CURIEs, the "prefer" header and linked schemas instead of embedded - or simply ZIP the whole payload.
 
 ==== Discussion
 
+// Include details about savings with and without ZIP.
 
 ==== Example
 
