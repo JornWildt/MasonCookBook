@@ -218,7 +218,9 @@ If we include "method" and "encoding" in the example then we get this:
 }
 ----
 
-With the above information clients can now discover what HTTP method to use (POST) and how the payload should be encoded (plain JSON). Currently Mason only expects clients to handle JSON encoding of simple data and "multipart/form-data" for file uploads. But future extensions (or internal extensions) might use URL encoding for simple data and Zip for file uploads - or other better suited encodings.
+With the above information clients can now discover what HTTP method to use (POST) and how the payload should be encoded (plain JSON). 
+
+NOTE: Currently Mason only expects clients to handle JSON encoding of simple data and "multipart/form-data" for file uploads. But future extensions (or internal extensions) might for instance use URL encoding for simple data and Zip for file uploads - or other better suited encodings.
 
 But knowing the encoding alone is not enough - clients should also be able to discover what the expected payload is. This can be done using http://json-schema.org/[JSON schema] which is a JSON based format for describing JSON data structures. Such a schema can either be embedded directly in the hypermedia control using "schema" or referred to by a URL using "schemaUrl".
 
@@ -251,10 +253,11 @@ Here is how an embedded schema could describe the payload needed to "update stuf
 }
 ----
 
+In some cases it can also be useful to supply default values for the input data. 
 
 TEMPLATE????
 
-It can be argued that runtime discovery of method and encoding just adds unnecessary complexity as clients can be hardcoded to know these things based on the name of the hypermedia control: if the client knows how to look for the "update-stuff" control then it might as well know how to invoke it. On the other hand - if we accept that runtime lookup of URLs using links is good then we might as well go all the way and discover HTTP method and encoding at runtime too.
+NOTE: It can be argued that runtime discovery of method and encoding just adds unnecessary complexity as clients can be hardcoded to know these things based on the name of the hypermedia control: if the client knows how to look for the "update-stuff" control then it might as well know how to invoke it. On the other hand - if we accept that runtime lookup of URLs using links is good then we might as well go all the way and discover HTTP method and encoding at runtime too.
 
 The same argument goes for the schema description of the payload: if the client knows how to look for the "update-stuff" control then it surely also knows what the payload is expected to be.
 
