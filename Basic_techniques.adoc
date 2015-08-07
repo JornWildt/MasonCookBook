@@ -306,12 +306,51 @@ How can default values for input data be represented?
 
 ==== Solution
 
-Include default values in the "template" property if a hypermedia control.
+Include default values in the "template" property of a hypermedia control.
 
 ==== Discussion
 
+A hypermedia control for creating new items may need to include default values to present to the end user. This could of course be included as part of the API data itself but Mason includes a standard option for handling this kind of thing - the `template` property of a hypermedia control. This property defines a template for the data to be sent and clients are **required** to take this template and merge it with other input before sending the result or resolving URL templates.
 
 ==== Example
+
+Consider a hypermedia control for adding a new issue to an issue tracker. It could look somewhat like the one below with a title, a URL, the HTTP method and request encoding details:
+
+----
+{
+  "@controls": {
+    "is:add-issue": {  
+      "title":"Add issue",
+      "encoding":"json",
+      "href":"http://issue-tracker.org/projects/1/issues",
+      "method":"POST"
+    },
+----
+
+In order to supply default values to the client we now add the `template` object that contains two properties containing the default values for the issue title and severity:
+
+----
+{
+  "@controls": {
+    "is:add-issue": {  
+      "title":"Add issue",
+      "encoding":"json",
+      "href":"http://issue-tracker.org/projects/1/issues",
+      "method":"POST",
+      "template": {
+        "Title": "<insert issue title here>",
+        "Severity": 3
+      }
+    },
+----
+
+The client is expected to process this as follows:
+
+  . Read `template` value and use this to present default values to the end user (if one is involved).
+
+  . Get user input or calculated values and store that in a JSON object.
+
+  . Now merge the result back into the `template` object - overwrite with user input and keep the .... FIXME
 
 
 // ----------------------------------------------------------------------

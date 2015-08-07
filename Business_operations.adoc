@@ -31,7 +31,7 @@
 
 
 // ----------------------------------------------------------------------
-=== How update items using PUT (TBD)
+=== How to update items using PUT (TBD)
 
 ==== Problem
 
@@ -46,7 +46,7 @@
 
 
 // ----------------------------------------------------------------------
-=== How update items using PATCH (TBD)
+=== How to update items using PATCH (TBD)
 
 ==== Problem
 
@@ -73,3 +73,20 @@
 
 
 ==== Example
+
+
+// ----------------------------------------------------------------------
+=== How to invoke complex business operations (TBD)
+
+==== Problem
+
+
+==== Solution
+
+
+==== Discussion
+
+
+==== Example
+
+
