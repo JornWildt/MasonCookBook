@@ -298,7 +298,7 @@ This is how the issue tracker demo represents hypermedia controls for updating a
 
 // ----------------------------------------------------------------------
 [[recipe_default_values]]
-=== How to supply default values for input data (TBD)
+=== How to supply default values for input data
 
 ==== Problem
 
@@ -310,7 +310,7 @@ Include default values in the "template" property of a hypermedia control.
 
 ==== Discussion
 
-A hypermedia control for creating new items may need to include default values to present to the end user. This could of course be included as part of the API data itself but Mason includes a standard option for handling this kind of thing - the `template` property of a hypermedia control. This property defines a template for the data to be sent and clients are **required** to take this template and merge it with other input before sending the result or resolving URL templates.
+A hypermedia control for creating new items may need to include default values to present to the end user. This could of course be included as part of the API data itself but Mason includes a standard option for handling this kind of thing - the `template` property of a hypermedia control. This property defines a template for the data to be sent and clients are _required_ to take this template and merge it with other input before sending the result or resolving URL templates.
 
 ==== Example
 
@@ -344,13 +344,13 @@ In order to supply default values to the client we now add the `template` object
     },
 ----
 
-The client is expected to process this as follows:
+The client is now expected to process this as follows:
 
   . Read `template` value and use this to present default values to the end user (if one is involved).
 
   . Get user input or calculated values and store that in a JSON object.
 
-  . Now merge the result back into the `template` object - overwrite with user input and keep the .... FIXME
+  . Now merge the result back into the `template` object: overwrite the template with user input and keep the rest of the template intact as it may contain other values necessary for the server to handle the request correctly.
 
 
 // ----------------------------------------------------------------------
