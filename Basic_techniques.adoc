@@ -105,7 +105,7 @@ Here we have a namespace declaration that maps from "is" to "http://elfisk.dk/ma
 
 ==== Problem
 
-How can clients discover URLs that depends on values supplied by the client?
+How can a client discover URLs that depends on values supplied by the client?
 
 ==== Solution
 
@@ -180,7 +180,7 @@ If the client supplies the variables as a JSON object as the one below then the 
 
 ==== Problem
 
-How can clients discover available actions and their operational details?
+How can a client discover available actions and their operational details?
 
 ==== Solution
 
@@ -358,15 +358,50 @@ The client is now expected to process this as follows:
 
 ==== Problem
 
+How can a client discover operations that include file uploads?
 
 ==== Solution
 
+Use a `@controls` element with the encoding `json+files`.
 
 ==== Discussion
 
+It is sometimes relevant to include one or more binary documents _and_ some related JSON data in a server request in order to store those documents on the server together with the JSON data. This could for instance be a blog post with associated images or a new issue in the issue tracker with associated documentation. But how should the client encode such documents and data in one request and how does the server inform the client about it?
+
+For this purpose Mason inctroduces the `json+files` encoding scheme that allows clients to send both a JSON object _and_ a set of binary documents. This scheme requires the client to send all documents and the JSON object as multipart/form-data where each part represents either a document or the JSON object. This is identical to how HTML forms handle file uploads except that the whole data set must be JSON encoded instead of sending each JSON object property as a separate part.
+
+For the server to inform the client of the expected encoding scheme it must of course use a `@controls` element with `encoding` set to `json+files`. But it may also include a `jsonFile` property (string) that identifies the part containing the JSON data plus a `files` property (array) describing the set of possible documents to send.
 
 ==== Example
 
+The common issue tracker example allows clients to create new issues with attached documents. For this purpose it includes the following hypermedia control:
+
+----
+{  
+  "@namespaces":{  
+    "is":{  
+      "name":"http://elfisk.dk/mason/issue-tracker/reltypes.html#"
+    }
+  },
+  "@controls":{  
+    "is:add-issue":{  
+      "title":"Add issue",
+      "description":"Add new issue to project",
+      "encoding":"json+files",
+      "href":"http://mason-issue-tracker.azurewebsites.net/projects/1/issues",
+      "method":"POST",
+      "schemaUrl":"http://mason-issue-tracker.azurewebsites.net/schemas/create-issue",
+      "jsonFile":"args",
+      "files":[  
+        {  
+          "name":"attachment",
+          "title":"Attachment",
+          "description":"Include attachment for new issue."
+        }
+      ]
+    }
+  }}
+----
 
 
 // ----------------------------------------------------------------------
