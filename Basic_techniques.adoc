@@ -403,6 +403,42 @@ The common issue tracker example allows clients to create new issues with attach
   }}
 ----
 
+What the above example means is:
+
+  . Use multipart/form-data to encode one or more documents (since `encoding` is `json+files`).
+
+  . Expect one document (multipart) named `args` which will contain a JSON object with related data.
+
+  . Expect one file named "attachment".
+
+As a result the client might send a request like the one below:
+
+----
+POST http://issue-tracker.org/projects/1/issues HTTP/1.1
+Content-Type: multipart/form-data; boundary=95e1d3c8-454e-4ced-96e7-d6f3a6e65db5
+
+
+--95e1d3c8-454e-4ced-96e7-d6f3a6e65db5
+Content-Disposition: form-data; name="attachment"; filename="log.txt"
+
+... logfile content ...
+--95e1d3c8-454e-4ced-96e7-d6f3a6e65db5
+Content-Disposition: form-data; name="args"; filename="args"
+Content-Type: application/json
+
+{
+  "Title":    "Crash",
+  "Description":    "I pressed X and it crashed",
+  "Severity":    5,
+  "Attachment":
+    {
+      "Title":        "Documentation",
+      "Description":        "Logfile"
+    }
+
+}
+----
+
 
 // ----------------------------------------------------------------------
 === How to represent a home document (TBD)
