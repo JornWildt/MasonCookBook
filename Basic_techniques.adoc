@@ -354,7 +354,7 @@ The client is now expected to process this as follows:
 
 
 // ----------------------------------------------------------------------
-=== How to handle file uploads (TBD)
+=== How to handle file uploads
 
 ==== Problem
 
@@ -427,15 +427,14 @@ Content-Disposition: form-data; name="args"; filename="args"
 Content-Type: application/json
 
 {
-  "Title":    "Crash",
-  "Description":    "I pressed X and it crashed",
-  "Severity":    5,
+  "Title": "Crash",
+  "Description": "I pressed X and it crashed",
+  "Severity": 5,
   "Attachment":
-    {
-      "Title":        "Documentation",
-      "Description":        "Logfile"
-    }
-
+  {
+    "Title": "Documentation",
+    "Description": "This is the logfile"
+  }
 }
 ----
 
